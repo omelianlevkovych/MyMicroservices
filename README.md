@@ -77,9 +77,68 @@ The overall architecture design and technology stack is shown in the following p
 
 ![ildasm](https://github.com/omelianlevkovych/MyMicroservices/blob/main/assets/BigPicture.png)
 
+The business domain of the application is e-commerce.
+The core functionality is based on four microservices (APIs): Catalog, Basket, Ordering and Discount. 
+
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
+
+Each microservice is based on .Net technology stack using REST API architecture principles.
+
+For containerezation Docker and Docker Compose is used.
+
+Except from ASP.NET Core Web API app (.NET version 5) every microservice contains other technologies.
+
+The Catalog microservice includes:
+- **MongoDb**
+- Clean code, repository pattern, open-api spec, etc
+
+
+The Basket microservice includes:
+- **Redis db**
+- It consumes Discount **Grpc** Service for sync communication in order to calculate the product final price
+- It publishes to BasketCheckout Queue using **MassTransit** and **RabbitMQ**
+
+
+The Discount microservice includes:
+- ASP.NET **Grpc** Service app
+- High performant inter-service gRPC communication with Basket microservice
+- **Dapper** for micro-orm implementation
+- **PostgreSQL db**
+
+
+The Ordering microservice includes:
+- **DDD, CQRS** approaches
+- CQRS with using **MediatR, FluentValidation and AutoMapper packages**
+- Consuming **RabbitMQ** BasketCheckout queue with using **MassTransit-RabbitMQ** config
+- **SqlServer db**
+- **Entity Framework Core** ORM
+
+The API Gateway Ocelot:
+- Implement **API Gateways with Ocelot**
+- Microservices/containers to reroute through the API Gateway
+- Run multiple different **API Gateway/BFF** container types
+- The Gateway **aggregation pattern** in Shopping.Aggregation
+
+WebUI ShoppingApp microservice includes:
+- ASP.NET Core Web App with Bootstrap 4 and Razor template
+- Call **Ocelot APIs with HttpClientFactory** and **Polly**
+
+Microservices Cross-Cutting Implementations:
+- Implementing **Centralized Distributed Logging with Elastic Stack (ELK); Leasticsearch, Logstash, Kibana and SeriLog**
+- Use the **HealthChecks** featrue in back-end ASP.NET
+- Using **Watchdog** in separate service that can watch health and load across services, and report health
+
+The microservices resilience implementations:
+- Making microservices more resilent by using **IHttpClientFactory**
+- Implement **Retry and Circuit Breaker patterns** with IHttpClientFactory and **Polly policies**
+
+The containers:
+- Docker is used
+- For container lightweight managment through GUI the **Portainer** is used
+- The **pgAdmin PostgreSQL** Tools
+
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Bootstrap](https://getbootstrap.com)
@@ -179,7 +238,6 @@ Readme Template
 
 * [.Net Architecture](https://github.com/dotnet-architecture/eShopOnContainers)
 * [.Net Run Project](https://github.com/aspnetrun/run-aspnetcore-microservices)
-* 
 
 
 
