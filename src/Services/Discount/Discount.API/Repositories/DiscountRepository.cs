@@ -1,28 +1,31 @@
 ﻿using Dapper;
+using Discount.API.Configuration.Interfaces;
 using Discount.API.Entities;
 using Discount.API.Repositories.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System;
+using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace Discount.API.Repositories
 {
-    public class DiscountRepository : IDiscountRepository
+    public class DiscountRepository : IDiscountRepository, IDisposable
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfigurationManager configurationManager;
+        private readonly DbConnection dbConnection;
 
-        public DiscountRepository(IConfiguration configuration)
+        public DiscountRepository(
+            IConfigurationManager configurationManager)
         {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this.configurationManager = configurationManager ?? throw new ArgumentNullException(nameof(configurationManager));
+
+            dbConnection = new NpgsqlConnection(
+                this.configurationManager.GetConfiguration<string>("DatabaseSettings:ConnectionString"));
         }
 
         public async Task<bool> CreateDiscount(CouponEntity coupon)
         {
-            using var connection = new NpgsqlConnection(
-                configuration.GetValue<string>("DatabaseSettingsConnectionString"));
-
-            var affected = await connection.ExecuteAsync(
+            var affected = await dbConnection.ExecuteAsync(
                 "INSERT INTO Coupon (ProductName, Description, Amount) VALUES (@ProductName, @Desrciption, @Amount)",
                 new
                 {
@@ -41,10 +44,7 @@ namespace Discount.API.Repositories
 
         public async Task<bool> DeleteDiscount(string productName)
         {
-            using var connection = new NpgsqlConnection(
-                configuration.GetValue<string>("DatabaseSettingsConnectionString"));
-
-            var affected = await connection.ExecuteAsync(
+            var affected = await dbConnection.ExecuteAsync(
                 "DELETE FROM Coupon WHERE ProductName = @ProductName",
                 new
                 {
@@ -61,10 +61,7 @@ namespace Discount.API.Repositories
 
         public async Task<CouponEntity> GetDiscount(string productName)
         {
-            using var connection = new NpgsqlConnection(
-                configuration.GetValue<string>("DatabaseSettingsConnectionString"));
-
-            var coupon = await connection.QueryFirstOrDefaultAsync<CouponEntity>(
+            var coupon = await dbConnection.QueryFirstOrDefaultAsync<CouponEntity>(
                 "SELECT * FROM Coupon WHERE ProductName = @ProductName", new { ProductName = productName });
 
             if (coupon is null)
@@ -82,10 +79,7 @@ namespace Discount.API.Repositories
 
         public async Task<bool> UpdateDiscount(CouponEntity coupon)
         {
-            using var connection = new NpgsqlConnection(
-                configuration.GetValue<string>("DatabaseSettingsConnectionString"));
-
-            var affected = await connection.ExecuteAsync(
+            var affected = await dbConnection.ExecuteAsync(
                 "UPDATE Coupon SET ProductName = @ProductName, Description = @Description, Amount = @Amount WHERE Id = @Id",
                 new
                 {
@@ -101,6 +95,11 @@ namespace Discount.API.Repositories
             }
 
             return true;
+        }
+
+        public void Dispose()
+        {
+            this.dbConnection.Dispose();
         }
     }
 }
