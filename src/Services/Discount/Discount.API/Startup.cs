@@ -1,3 +1,7 @@
+using Discount.API.Configuration;
+using Discount.API.Configuration.Interfaces;
+using Discount.API.Repositories;
+using Discount.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +29,8 @@ namespace Discount.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddTransient<IConfigurationManager, ConfigurationManager>();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
