@@ -27,14 +27,14 @@
   <p align="center">
     Simple microservices via .Net technologies!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/omelianlevkovych/MyMicroservices"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/omelianlevkovych/MyMicroservices">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/omelianlevkovych/MyMicroservices/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/omelianlevkovych/MyMicroservices/issues">Request Feature</a>
   </p>
 </p>
 
@@ -57,7 +57,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#usage">Build and Test</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -245,14 +245,14 @@ Readme Template
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/omelianlevkovych/MyMicroservices.svg?style=for-the-badge
 [contributors-url]: https://github.com/omelianlevkovych/MyMicroservices/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[forks-shield]: https://img.shields.io/github/forks/omelianlevkovych/MyMicroservices.svg?style=for-the-badge
+[forks-url]: https://github.com/omelianlevkovych/MyMicroservices/network/members
+[stars-shield]: https://img.shields.io/github/stars/omelianlevkovych/MyMicroservices.svg?style=for-the-badge
+[stars-url]: https://github.com/omelianlevkovych/MyMicroservices/stargazers
+[issues-shield]: https://img.shields.io/github/issues/omelianlevkovych/MyMicroservices.svg?style=for-the-badge
+[issues-url]: https://github.com/omelianlevkovych/MyMicroservices/issues
+[license-shield]: https://img.shields.io/github/license/omelianlevkovych/MyMicroservices.svg?style=for-the-badge
+[license-url]: https://github.com/omelianlevkovych/MyMicroservices/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://404.lol
 [product-screenshot]: assets/screenshot.png
